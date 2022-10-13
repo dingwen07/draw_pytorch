@@ -67,7 +67,7 @@ class DrawModel(nn.Module):
 
         enc_state = Variable(torch.zeros(self.batch_size,self.enc_size))
         dec_state = Variable(torch.zeros(self.batch_size, self.dec_size))
-        for t in xrange(self.T):
+        for t in range(self.T):
             c_prev = Variable(torch.zeros(self.batch_size,self.A * self.B)) if t == 0 else self.cs[t-1]
             x_hat = x - self.sigmoid(c_prev)     # 3
             r_t = self.read(x,x_hat,h_dec_prev)
@@ -86,7 +86,7 @@ class DrawModel(nn.Module):
         Lx = criterion(x_recons,x) * self.A * self.B
         Lz = 0
         kl_terms = [0] * T
-        for t in xrange(self.T):
+        for t in range(self.T):
             mu_2 = self.mus[t] * self.mus[t]
             sigma_2 = self.sigmas[t] * self.sigmas[t]
             logsigma = self.logsigmas[t]
@@ -171,7 +171,7 @@ class DrawModel(nn.Module):
         h_dec_prev = Variable(torch.zeros(self.batch_size,self.dec_size),volatile = True)
         dec_state = Variable(torch.zeros(self.batch_size, self.dec_size),volatile = True)
 
-        for t in xrange(self.T):
+        for t in range(self.T):
             c_prev = Variable(torch.zeros(self.batch_size, self.A * self.B)) if t == 0 else self.cs[t - 1]
             z = self.normalSample()
             h_dec, dec_state = self.decoder(z, (h_dec_prev, dec_state))

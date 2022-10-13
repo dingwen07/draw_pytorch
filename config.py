@@ -9,5 +9,5 @@ enc_size = 256
 epoch_num = 20
 learning_rate = 1e-3
 beta1 = 0.5
-USE_CUDA = True
+USE_CUDA = False
 clip = 5.0
